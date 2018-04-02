@@ -1,0 +1,386 @@
+@font-face {
+	font-family: 'iconfont';  /* project id 561408 */
+	src: url('https://at.alicdn.com/t/font_561408_54hb2hw8sws1c3di.eot');
+	src: url('https://at.alicdn.com/t/font_561408_54hb2hw8sws1c3di.eot?#iefix') format('embedded-opentype'),
+	url('https://at.alicdn.com/t/font_561408_54hb2hw8sws1c3di.woff') format('woff'),
+	url('https://at.alicdn.com/t/font_561408_54hb2hw8sws1c3di.ttf') format('truetype'),
+	url('https://at.alicdn.com/t/font_561408_54hb2hw8sws1c3di.svg#iconfont') format('svg');
+}
+body
+{
+	font-size: 12px;
+	background-color: #f5f5f5;
+}
+.address
+{
+	font-family: 'iconfont';
+	font-size: 18px;
+	color: #eeeeee;
+}
+#now
+{
+	width: 100%;
+	height: 13.8rem;
+	/* background-color: red; */
+	background-image: url('../img/screen.png'),linear-gradient(#3bbdff,#46e5ff);
+	/* (渐变是一张图)两张图用逗号隔开,第一个在最上面显示 */
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: bottom center;
+	
+
+}
+.now_city
+{
+	font-size: 0.34rem;
+	color: #fff;
+	text-align: center;
+	line-height: 1.57rem;
+}
+.now_air
+{
+	width: 2.1rem;
+	height: 1.26rem;
+	background-color: #f1ab62;
+	margin: 0.05rem 0 0 0.26rem;
+	border-radius: 0.2rem;
+	padding-top: 0.31rem;
+	text-align: center;
+}
+.now_air h1,.now_air h2
+{
+	font-size: 0.34rem;
+	color: #fff;
+}
+.now_temp
+{
+	font-size: 0.96rem;
+	color: #fff;
+	text-align: center;
+	margin-top: 0.77rem;
+	line-height: 0.96rem;
+}
+.now_status
+{
+	font-size: 0.51rem;
+	color: #fff;
+	text-align: center;
+	margin-top: 0.9rem;
+	line-height: 0.51rem;
+}
+.now_wind_derction
+{
+	
+	font-size: 0.32rem;
+	line-height: 0.32rem;
+	text-align: center;
+	color: #fff;
+	margin-top: 0.54rem;
+}
+.now_greet
+{
+	font-size: 0.32rem;
+	color: #fff;
+	margin-top: 1.49rem;
+	text-align: center;
+}
+#future
+{
+	width: 100%;
+	height: 3.09rem;
+	background-color: #fff;
+	border-bottom: 0.03px solid #e4e4e4;
+	padding: .72rem 0;
+
+}
+.future_box
+{
+	width: 50%;
+	height: 100%;
+	float: left;
+	padding: 0 0.58rem;
+	font-size: 0.32rem;
+
+}
+.tody
+{
+	border-right: 0.03rem solid #e4e4e4;
+}
+.future_top
+{
+	width: 100%;
+	height: 50%;
+	/* background-color: red; */
+}
+.tomorrow_top
+{
+	width: 100%;
+	height: 50%;
+}
+.future_date
+{
+	float: left;
+}
+.future_top p
+{
+	float: right;
+}
+.tomorrow_top p
+{
+	float: right;
+}
+.today_img
+{
+	width: 0.72rem;
+	height: 0.72rem;
+	float: right;
+	/* background-color: green; */
+}
+.f_today_img
+{
+	width: 0.72rem;
+	height: 0.72rem;
+	float: right;
+	/* background-color: green; */
+}
+#hours
+{
+	width: 100%;
+	height: 3.9rem;
+	background-color: #fff;
+	border-top: 0.03rem solid #e4e4e4;
+	border-bottom: 0.03rem solid #e4e4e4;
+	margin-top: 0.3rem;
+	/* 设置li自动横排自动填充父元素 */
+	display: flex;
+	/* 设置水平滑动 */
+	overflow-x: scroll;
+}
+#hours::-webkit-scrollbar,#future_week::-webkit-scrollbar,.city_more::-webkit-scrollbar
+{
+	/* 滚动条消失 */
+	display: none;
+	/* 滚动条显示 */
+	/* display: block; */
+}
+#hours li
+{
+	width: 2rem;
+	height: 100%;
+	/* background-color: red; */
+	padding: 0.7rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: space-between;
+	/* flex-shrink的默认值为1，当父元素的宽度小于所有子元素的宽度的和时，
+	子元素的宽度会减小。值越大，减小的越厉害。如果值为0，表示不减小。 */
+	flex-shrink: 0;
+	/* flex-direction: column; */
+	overflow-y: auto;
+}
+.hours_img
+{
+	width: 1rem;
+	height: 1rem;
+	padding: 0 0.4rem;
+	box-sizing: content-box;
+}
+.hours_time,.hours_temp,.future_week_date h1
+{
+	font-size: 0.26rem;
+}
+.future_week_date
+{
+	font-size: 0.26rem;
+	width: 1.02rem;
+	height: 0.4rem;
+}
+.future_week_status_box
+{
+	width: 1.61rem;
+	height: 0.5rem;
+	text-align: center;
+}
+#future_week
+{
+	width: 100%;
+	height: 11.9rem;
+	background-color:#fff;
+	border-top: 0.03rem solid #e4e4e4;
+	border-bottom: 0.03rem solid #e4e4e4;
+	margin-top: 0.3rem;
+	display: flex;
+	overflow-x: scroll;
+}
+#future_week li
+{
+	width: 2rem;
+	height: 100%;
+	/* background-color: green; */
+	padding: 0.7rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: space-between;
+	flex-shrink: 0;
+}
+.future_week_status
+{
+	font-size: 0.31rem;
+}
+.week_img
+{
+	width: 1.5rem;
+	height: 1.5rem;
+	padding: 0 0.4rem;
+	box-sizing: content-box;
+}
+.week_number
+{
+	width: 1rem;
+	height: 1rem;
+	padding: 0 0.6rem;
+	box-sizing: content-box;
+	align-items: center;
+	text-align: center;
+}
+.week_fengxiang
+{
+	width: 2rem;
+	height: 1rem;
+	text-align: center;
+}
+.week_fengji
+{
+	font-size: 0.26rem;
+}
+#citys
+{
+	
+	width: 100vw;
+	height: 100vh;
+	background-color:#f6f6f6;
+	display: none;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	z-index: 999;
+	/* position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: red; */
+}
+header
+{
+	width: 100%;
+	height: 6vh;
+	background-color: #fff;
+	padding: 0 0.29rem;
+	/* 使用弹性布局快速布局 */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+.search
+{
+	width: 9.03rem;
+	height: 0.87rem;
+	background-color: #e2e2e2;
+	border-style: none;
+	border-radius: 0.2rem;
+	padding-left: 0.2rem;
+	outline: none;
+}
+.btn
+{
+	font-size: 0.44rem;
+	color: #89b5ff;
+}
+.city_choose
+{
+	width: 100%;
+	padding: 0.19rem 0 0 0.33rem;
+
+}
+.city_choose h1
+{
+	font-size: 0.44rem;
+	color: #999999;
+}
+.remen_city_content
+{
+	width: 7.77rem;
+	overflow: hidden;
+	padding: 0.2rem 0 0 0;
+}
+.remen_city_content li
+{
+	width: 2.31rem;
+	height: 0.84rem;
+	background-color: #fff;
+	border: 0.03rem solid #e0e0e0;
+	font-size: 0.38rem;
+	text-align:center;
+	line-height: 0.84rem;
+	float: left;
+	border-radius: 0.1rem;
+
+}
+.province
+{
+	width: 2.31rem;
+	height: 0.84rem;
+	background-color: #fff;
+	border: 0.03rem solid #e0e0e0;
+	font-size: 0.38rem;
+	text-align:center;
+	line-height: 0.84rem;
+	float: left;
+	border-radius: 0.1rem;
+	margin-right: 0.5rem;
+	margin-top: 0.5rem;
+}
+.city
+{
+	width: 2.31rem;
+	height: 0.84rem;
+	background-color: #fff;
+	border: 0.03rem solid #e0e0e0;
+	font-size: 0.38rem;
+	text-align:center;
+	line-height: 0.84rem;
+	float: left;
+	border-radius: 0.1rem;
+	margin-right: 0.5rem;
+	margin-top: 0.5rem;
+}
+
+.remai_city_content_left
+{
+	margin-left: 0.39rem;
+}
+.remai_city_content_top
+{
+	margin-top: 0.39rem;
+}
+.chengshi1
+{
+	padding-top: 0.5rem;
+}
+.city_top
+{
+	margin-top: 0.45rem;
+}
+
+.city_more
+{
+	width: 100%;
+	height: 94vh;
+	overflow-y: scroll;
+	padding: 0 1.1rem;
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,
+	user-scalable=no,initial-scale=1.0, maximum-scale=1.0, 
+	minimum-scale=1.0">
+	<link rel="stylesheet" href="css/public.css">
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="icon" href="img/logo.ico" type="image/x-icon">
+	<script src="js/rem.js"></script>
+	<title>天气App</title>
+</head>
+<body>
+	<!-- 当前的信息开始 -->
+	<section id="now">
+		<!-- 当前城市开始 -->
+		<h1 class="now_city">
+			<span class="address">&#xe68d;</span>
+			<span class="now_city_name"></span>
+		</h1>
+		<!-- 当前空气质量 -->
+		<div class="now_air">
+			<h1>空气</h1>
+			<h2></h2>
+		</div>
+		<!-- 当前温度 -->
+		<h2 class="now_temp">
+			<span></span>℃
+		</h2>
+		<!-- 当前状态 -->
+		<h2 class="now_status">
+		</h2>
+		<!-- 当前风向级数 -->
+		<div class="now_wind_derction">
+			<span class="now_wind_derction1"></span>
+			<span class="now_wind_derction2"></span>
+		</div>
+		<p class="now_greet"></p>
+	</section>
+	<!-- 当前信息结束 -->
+	<!-- 未来两天的天气信息 -->
+	<section id="future">
+		<div class="future_box tody">
+			<div class="future_top">
+				<span class="future_date">今天</span>
+				<p><span class="today_hightemp"></span>-
+				<sapn class="tody_lowemp"></sapn>℃</p>
+			</div>
+			<div class="future_top">
+				<span class="tody_weather"></span>
+				<div class="today_img">
+					<img src="img/1.png" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="future_box tomorrow">
+			<div class="tomorrow_top">
+				<span class="future_date">明天</span>
+				<p><span class="f_today_hightemp"></span>-
+				<sapn class="f_tody_lowemp"></sapn>℃</p>
+			</div>
+			<div class="tomorrow_top">
+				<span class="f_tody_weather"></span>
+				<div class="f_today_img">
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- 未来24小时 -->
+	<ul id="hours">
+	</ul>
+	<!-- 未来一周 -->
+	<ul id="future_week">
+	</ul>
+	<main id="citys">
+		<header>
+			<input type="text" class="search" placeholder="请输入搜索内容">
+			<h1 class="btn">取消</h1>
+		</header>
+		<div class="city_more">
+
+		</div>
+	</main>
+</body>
+<script src="js/jq3.js"></script>
+<script>
+    $.getScript("//int.dpool.sina.com.cn/iplookup/iplookup.php?format=js",function(){
+        //根据ip获取相应的信息
+        var data=remote_ip_info;
+        var city=data.city;
+        // $("h3 span").html(city);
+        // getWeather($("h3 span").html());
+        getWeather(city);
+    })
+    function getWeather(city){
+        $(".now_city_name").html(city);
+        $.ajax({
+            url:"//api.jisuapi.com/weather/query?appkey=2f7abc8504b511ab&city="+city,
+            dataType:"jsonp",
+            // jsonp:"callback",
+            success:function(r)
+            {
+                //head
+                let zhiliang=r.result.index;
+                let airzl=zhiliang[5].ivalue;
+                let dressindex=zhiliang[6].ivalue
+                $(".now_air h2").html(airzl);
+                $(".now_greet").html(dressindex);
+                $(".now_temp span").html(r.result.temp);
+                $(".now_status").html(r.result.weather);
+                $(".now_wind_derction1").html(r.result.winddirect);
+                $(".now_wind_derction2").html(r.result.windpower);
+				//tody
+                $(".today_hightemp").html(r.result.daily[0].day.temphigh);
+                $(".tody_lowemp").html(r.result.daily[0].night.templow);
+                $(".tody_weather").html(r.result.daily[0].day.weather);
+                $(".today_img").html(`<img src="weathercn/${r.result.daily[0].day.img}.png">`);
+                //明天
+                $(".f_today_hightemp").html(r.result.daily[1].day.temphigh);
+                $(".f_tody_lowemp").html(r.result.daily[1].night.templow);
+                $(".f_tody_weather").html(r.result.daily[1].day.weather);
+                $(".f_today_img").html(`<img src="weathercn/${r.result.daily[1].day.img}.png">`);
+                //************future24
+				let future24=r.result.hourly;
+				let str24="";
+				$.each(future24,function(index,val){
+				    str24+=`<li>
+								<h1 class="hours_time">${val.time}</h1>
+								<div class="hours_img"><img src="weathercn/${val.img}.png" alt=""></div>
+								<h2 class="hours_temp"><span>${val.temp}</span>℃</h2>
+							</li>`;
+				})
+				$("#hours").html(str24);
+				//未来一周
+                let data=r.result.daily;
+                let str="";
+                $.each(data,function(index,val){
+                    str+=`<li>
+						<div class="future_week_date"><h1>${val.date}</h1></div>
+						<div class="future_week_status_box"><h2 class="future_week_status">${val.day.weather}</h2></div>
+						<div class="week_img"><img src="weathercn/${val.day.img}.png" alt=""></div>
+						<h2 class="future_week_date week_number">${val.day.temphigh}℃</h2>
+						<h2 class="future_week_date week_number low">${val.night.templow}℃</h2>
+						<h1 class="future_week_date week_fengxiang">${val.day.winddirect}</h1>
+					</li>`;
+                })
+                $("#future_week").html(str);
+            }
+        })
+    }
+    $(".address").click(function(){
+        $("#citys").css("position","fixed");
+        $("#citys").css("display","block");
+        var data=[];//存放所有数据
+        var province=[];//存放所有省
+        var city=[];//存放某个省的所有市
+        $.ajax({
+            url:"//api.jisuapi.com/weather/city?appkey=8689c8a970e612e6",
+            dataType:"jsonp",
+            success:function(r){
+                console.log(r);
+                data=r.result;
+                province=$.grep(data,function(val,index){
+                    if(val.parentid==="0")
+                    {
+                        return true;
+                    }
+                })
+                let str="";
+                $.each(province,function(index,val){
+                    str+=`<div class="province" id="${val.cityid}">${val.city}</div>`;
+                })
+                $(".city_more").html(str);
+            }
+        })
+        $(".city_more").on("touchstart",".province",function(){
+            var id=$(this).attr("id");
+            city=$.grep(data,function(val,index){
+                if(val.parentid===id)
+                {
+                    return true;
+                }
+            })
+            let str1="";
+            $.each(city,function(index,val){
+                str1+=`<div class="city">${val.city}</div>`;
+            })
+            $(".city_more").html(str1);
+        })
+        $(".city_more").on("touchstart",".city",function(){
+            getWeather($(this).html());
+            $("#citys").hide();
+        })
+    })
+</script>
+</html>
+
+
+<!-- 物理像素rem 逻辑像素px
+单位rem(根节点字体大小变化)
+750 1rem=100px	Font=100px  1080
+375 1rem=50px	Font=50px;	375	
+414 1rem=55.2px Font=55.2px;
+em(根据元素字体大小) 
+href 和 src的区别
+-->
